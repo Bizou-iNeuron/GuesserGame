@@ -6,15 +6,24 @@ class Giver
 	int giveNum()
 	{
 		Random rand = new Random(); // get a random number between 0 and 9
-		giveNum = rand.nextInt(10);
+		giveNum = 3;//rand.nextInt(10);
 		return giveNum;
 	}
 }
 
 class Player
 {
+	String name; // store the player's name
 	int guessNum; // store the number guessed by players
-	String username; // store the player username
+
+	String name(int player)
+	{
+		Scanner scan = new Scanner(System.in);
+		System.out.print("Player "+ player+" enter your name "); // players input their guessed number
+		name=scan.nextLine();
+		return name;
+	}
+	
 	int guessNum(String name)
 	{
 		Scanner scan = new Scanner(System.in);
@@ -30,13 +39,7 @@ class Player
 		return guessNum;
 		
 	}
-	String username(int player)
-	{
-		Scanner scan = new Scanner(System.in);
-		System.out.print("Player "+ player+" enter your name "); // players input their guessed number
-		username=scan.nextLine();
-		return username;
-	}
+	
 }
 
 class Computer 
@@ -52,9 +55,9 @@ class Computer
 
 class Umpire
 {
-	static String usernamePlayer1;
-	static String usernamePlayer2;
-	static String usernamePlayer3;
+	static String Player1;
+	static String Player2;
+	static String Player3;
 	
 	int numFromGiver; // store the random number to guess
 	int numFromPlayer1; // store the number from player 1
@@ -74,18 +77,20 @@ class Umpire
 	
 	int round = 1;
 	
+	String playAgain ;
+	
 	void getTheNames()
 	{
 		Player p1= new Player(); // create the object of player 1
 		Player p2= new Player(); // create the object of player 2
 		Player p3= new Player(); // create the object of player 3
 		
-		usernamePlayer1 = p1.username(1);
-		usernamePlayer2 = p2.username(2);
-		usernamePlayer3 = p3.username(3);
+		Player1 = p1.name(1);
+		Player2 = p2.name(2);
+		Player3 = p3.name(3);
 		
 		System.out.println();
-		System.out.println("Welcome "+usernamePlayer1+", "+usernamePlayer2+" and "+usernamePlayer3+" ! You will play against 2 computers\nMay the best Guesser win !\n\n");
+		System.out.println("Welcome "+Player1+", "+Player2+" and "+Player3+" ! You will play against 2 computers\nMay the best Guesser win !\n\n");
 	}
 	
 	void collectNums()
@@ -98,9 +103,9 @@ class Umpire
 		Player p2= new Player(); // create the object of player 2
 		Player p3= new Player(); // create the object of player 3
 		
-		numFromPlayer1 = p1.guessNum(usernamePlayer1); // store the guessed number of player 1 in the variable numFromPlayer1
-		numFromPlayer2 = p2.guessNum(usernamePlayer2); // store the guessed number of player 2 in the variable numFromPlayer2
-		numFromPlayer3 = p3.guessNum(usernamePlayer3); // store the guessed number of player 3 in the variable numFromPlayer3
+		numFromPlayer1 = p1.guessNum(Player1); // store the guessed number of player 1 in the variable numFromPlayer1
+		numFromPlayer2 = p2.guessNum(Player2); // store the guessed number of player 2 in the variable numFromPlayer2
+		numFromPlayer3 = p3.guessNum(Player3); // store the guessed number of player 3 in the variable numFromPlayer3
 	
 		Computer c1= new Computer(); // create the object of Computer 1
 		Computer c2= new Computer(); // create the object of Computer 2
@@ -130,18 +135,18 @@ class Umpire
 			{
 				countPlayer1 ++;
 				countPlayer2 ++;
-				System.out.println("=> "+usernamePlayer1+" and "+usernamePlayer2+" won this round !");
+				System.out.println("=> "+Player1+" and "+Player2+" won this round !");
 			}
 			else if (numFromGiver == numFromPlayer3)
 			{
 				countPlayer1 ++;
 				countPlayer3 ++;
-				System.out.println("=> "+usernamePlayer1+" and "+usernamePlayer3+" won this round !");
+				System.out.println("=> "+Player1+" and "+Player3+" won this round !");
 			}
 			else 
 			{
 				countPlayer1 ++;
-				System.out.println("=> "+usernamePlayer1+" won this round !");
+				System.out.println("=> "+Player1+" won this round !");
 			}
 		}
 		else if (numFromGiver == numFromPlayer2)
@@ -150,18 +155,18 @@ class Umpire
 			{
 				countPlayer3 ++;
 				countPlayer2 ++;
-				System.out.println("=> "+usernamePlayer2+" and "+usernamePlayer3+" won this round !");
+				System.out.println("=> "+Player2+" and "+Player3+" won this round !");
 			}
 			else 
 			{
 				countPlayer2 ++;
-				System.out.println("=> "+usernamePlayer2+" won this round !");
+				System.out.println("=> "+Player2+" won this round !");
 			}
 		}
 		else if (numFromGiver == numFromPlayer3)
 		{
 			countPlayer3 ++;
-			System.out.println("=> "+usernamePlayer3+" won this round !");
+			System.out.println("=> "+Player3+" won this round !");
 		}
 		else 
 		{
@@ -203,9 +208,9 @@ class Umpire
 	{
 		System.out.println("\n\nROUNDS WON");
 		System.out.println("----------");
-		System.out.println(usernamePlayer1+": "+countPlayer1);
-		System.out.println(usernamePlayer2+": "+countPlayer2);
-		System.out.println(usernamePlayer3+": "+countPlayer3);
+		System.out.println(Player1+": "+countPlayer1);
+		System.out.println(Player2+": "+countPlayer2);
+		System.out.println(Player3+": "+countPlayer3);
 		System.out.println("Computer 1: "+countComputer1);
 		System.out.println("Computer 2: "+countComputer2+"\n\n");
 		
@@ -236,22 +241,87 @@ class Umpire
 			{
 				switch (i)
 				{
-				case (0): System.out.println("!!! HURRAYYY "+usernamePlayer1.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
-				case (1): System.out.println("!!! HURRAYYY "+usernamePlayer2.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
-				case (2): System.out.println("!!! HURRAYYY "+usernamePlayer3.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
+				case (0): System.out.println("!!! HURRAYYY "+Player1.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
+				case (1): System.out.println("!!! HURRAYYY "+Player2.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
+				case (2): System.out.println("!!! HURRAYYY "+Player3.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
 				case (3): System.out.println("!!! COMPUTER 1 WON THE GAME IN "+round+" ROUNDS !!!");break;
 				case (4): System.out.println("!!! COMPUTER 1 WON THE GAME IN "+round+" ROUNDS !!!");break;
 				}
 			}
 		}
+		
+		playAgain();
 	}
+	
+	void playAgain()
+	{
+		Scanner scan = new Scanner(System.in);
+		System.out.print("\n\nDo you want to play again ? yes or no: ");
+		String playAgain = scan.nextLine();
+		
+		switch (playAgain)
+		{
+		case ("yes"): GuessNumber.startGame() ; break;
+		case ("no"): System.out.println("\n\nThank you for playing\n\nSee you next time !");break;
+		default: System.out.println("\n\nThank you for playing\n\nSee you next time !");
+		}
+	}
+
 }
 
 public class GuessNumber {
+	
+	static String username;
+	static String password;
+	String usernameInput;
+	String passwordInput;
+	
 
 	public static void main(String[] args) {
 		
-		System.out.println("\n*** GUESS THE NUMBER BETWEEN 0 AND 9 ***\nThe first to win 3 rounds wins the Game !\n");
+		Scanner scan = new Scanner (System.in);
+		System.out.println("Hello and welcome to the console.\n\nTo Enter please create a username: ");
+		String username = scan.nextLine();
+				
+		System.out.println("Please create a password (case sensitive): ");
+		String password = scan.nextLine();
+		
+		System.out.println("Thank you.\n\nNow please login to start playing");
+		login(username, password);
+	}
+	
+	private static void login (String username, String password)
+	{
+
+		Scanner scan = new Scanner (System.in);
+		System.out.println("Enter your username: ");
+		String usernameInput = scan.nextLine();
+		if (username.equalsIgnoreCase(usernameInput))
+		{
+			System.out.println("Enter your password (case sensitive): ");
+			String passwordInput = scan.nextLine();
+			if (password.equals(passwordInput))
+			{
+				System.out.println("\nlet's play !");
+				startGame();
+			}
+			else
+			{
+				System.out.println("sorry wrong password. \nPlease log in again");
+				login(username, password);
+			}
+		}
+		else
+		{
+			System.out.println("sorry wrong username. \nPlease log in again");
+			login(username, password);
+		}
+		
+	}
+	
+	public static void startGame()
+	{
+		System.out.println("\n*** GUESS THE NUMBER BETWEEN 0 AND 9 ***\n\n3 players & 2 computers are playing\nThe first to win 3 rounds wins the Game !\n");
 		// initiate the umpire
 		Umpire u = new Umpire(); // create the object Umpire
 		u.getTheNames();
