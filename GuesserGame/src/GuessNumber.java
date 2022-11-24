@@ -6,7 +6,7 @@ class Giver
 	int giveNum()
 	{
 		Random rand = new Random(); // get a random number between 0 and 9
-		giveNum = 3;//rand.nextInt(10);
+		giveNum = rand.nextInt(10);
 		return giveNum;
 	}
 }
@@ -245,7 +245,7 @@ class Umpire
 				case (1): System.out.println("!!! HURRAYYY "+Player2.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
 				case (2): System.out.println("!!! HURRAYYY "+Player3.toUpperCase()+" WON THE GAME IN "+round+" ROUNDS !!!");break;
 				case (3): System.out.println("!!! COMPUTER 1 WON THE GAME IN "+round+" ROUNDS !!!");break;
-				case (4): System.out.println("!!! COMPUTER 1 WON THE GAME IN "+round+" ROUNDS !!!");break;
+				case (4): System.out.println("!!! COMPUTER 2 WON THE GAME IN "+round+" ROUNDS !!!");break;
 				}
 			}
 		}
